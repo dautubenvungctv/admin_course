@@ -59,7 +59,7 @@ export const Home = () => {
           <div className="carousel">
             <CarouselHome />
           </div>
-          <div className=" box-shadow-2">
+          {/* <div className=" box-shadow-2">
             <h1 style={{ textAlign: "center" }}>
               <span style={{ color: "#3d5a98", fontSize: "80%" }}>
                 <strong>KHO KHÓA HỌC - SHARE HƠN 5000 KHÓA HỌC ONLINE</strong>
@@ -70,11 +70,21 @@ export const Home = () => {
               nhanh chóng. Chúng tôi liên tục cập nhật các khóa học mới đáp ứng
               nhu cầu của các bạn.
             </p>
+          </div> */}
+          <div className="member">
+            <div className="text-member">
+              Truy cập website/app dautubenvung.vn
+            </div>
+            <div className="box-btn">
+              <Link className="btn-member" to="/member">
+                Xem ngay
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="banner">
+      {/* <div className="banner">
         <a href="https://khokhoahoc.co/membership/">
           <img
             className="img-banner"
@@ -123,18 +133,7 @@ export const Home = () => {
         <button style={{ marginTop: "20px" }} onClick={handleAddBook}>
           Thêm sách
         </button>
-
-        <div className="member">
-          <div className="text-member">
-            Trở thành hội viên VIP để học miễn phí hơn 5000 khoá học
-          </div>
-          <div className="box-btn">
-            <Link className="btn-member" to="/member">
-              Xem ngay
-            </Link>
-          </div>
-        </div>
-      </div>
+      </div> */}
     </StyledHome>
   );
 };

@@ -20,6 +20,35 @@ export const StyledHome = styled.div<any>`
       .carousel {
         width: 100%;
       }
+      .member {
+        margin-top: 7px;
+        background-color: #80bd01;
+        padding: 30px;
+        display: grid;
+        gap: 20px;
+        .text-member {
+          font-size: 130%;
+          color: #ffffff;
+          font-weight: 700;
+          text-align: center;
+        }
+        .box-btn {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          .btn-member {
+            text-decoration: none;
+            background-color: #3594ef;
+            padding: 20px;
+            text-align: center;
+            width: 100px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 20px;
+          }
+        }
+      }
       .box-shadow-2 {
         background-color: rgb(242, 241, 182);
         border-color: rgb(52, 147, 250);
@@ -44,6 +73,35 @@ export const StyledHome = styled.div<any>`
 
       .carousel {
         width: 100%;
+      }
+      .member {
+        margin-top: 7px;
+        background-color: #80bd01;
+        padding: 30px;
+        display: grid;
+        gap: 20px;
+        .text-member {
+          font-size: 130%;
+          color: #ffffff;
+          font-weight: 700;
+          text-align: center;
+        }
+        .box-btn {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          .btn-member {
+            text-decoration: none;
+            background-color: #3594ef;
+            padding: 20px;
+            text-align: center;
+            width: 100px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 20px;
+          }
+        }
       }
       .box-shadow-2 {
         background-color: rgb(242, 241, 182);
@@ -201,35 +259,6 @@ export const StyledHome = styled.div<any>`
     }
     .ant-flex-gap-small {
       gap: 16px !important;
-    }
-    .member {
-      margin-top: 30px;
-      background-color: #80bd01;
-      padding: 30px;
-      display: grid;
-      gap: 20px;
-      .text-member {
-        font-size: 130%;
-        color: #ffffff;
-        font-weight: 700;
-        text-align: center;
-      }
-      .box-btn {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        .btn-member {
-          text-decoration: none;
-          background-color: #3594ef;
-          padding: 20px;
-          text-align: center;
-          width: 100px;
-          border-radius: 5px;
-          color: #ffffff;
-          font-weight: 700;
-          font-size: 20px;
-        }
-      }
     }
   }
 `;
