@@ -28,6 +28,13 @@ export const GroupDetail = () => {
   useEffect(() => {
     getDetailCourse();
   }, []);
+  useEffect(() => {
+    if (course) {
+      setTitle(course.title);
+      setImage(course.image);
+      setDescription(course.description);
+    }
+  }, [course]);
   const handlePut = () => {
     axios
       .put(`http://185.250.36.147:3000/groups/${id}`, {

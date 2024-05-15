@@ -28,6 +28,14 @@ export const BookDetail = () => {
   useEffect(() => {
     getDetailCourse();
   }, []);
+  useEffect(() => {
+    if (course) {
+      setTitle(course.title);
+      setImage(course.image);
+      setDescription(course.description);
+      setPrice(course.price);
+    }
+  }, [course]);
   const handlePut = () => {
     axios
       .put(`http://185.250.36.147:3000/books/${id}`, {

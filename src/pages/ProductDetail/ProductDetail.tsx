@@ -14,8 +14,10 @@ export const ProductDetail = () => {
 
   const { id } = useParams();
   const [course, setCourse] = useState<any>(null);
+  console.log("course: ", course?.title);
   const [fix, setFix] = useState(false);
   const [title, setTitle] = useState("");
+  console.log("title: ", title);
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -29,6 +31,14 @@ export const ProductDetail = () => {
   useEffect(() => {
     getDetailCourse();
   }, []);
+  useEffect(() => {
+    if (course) {
+      setTitle(course.title);
+      setImage(course.image);
+      setDescription(course.description);
+      setPrice(course.price);
+    }
+  }, [course]);
   const handlePut = () => {
     axios
       .put(`http://185.250.36.147:3000/courses/${id}`, {
