@@ -69,7 +69,7 @@ export const StyledHome = styled.div<any>`
     }
     .container {
       /* padding: 0 0px 0 17px; */
-      width: calc(100% - 39%);
+      width: 100%;
 
       .carousel {
         width: 100%;

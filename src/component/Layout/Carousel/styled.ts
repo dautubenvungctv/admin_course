@@ -8,8 +8,8 @@ export const StyledCarousel = styled.div<any>`
     border-style: solid;
     text-decoration: none;
     display: flex;
-    width: 150px;
-    height: 220px;
+    width: 281px;
+    height: 263px;
     padding: 8px;
     flex-direction: column;
     align-items: flex-start;

@@ -50,11 +50,6 @@ export const Home = () => {
     <StyledHome>
       <strong className="title-course">KHOÁ HỌC</strong>
       <div className="box-headerhome">
-        <img
-          src="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/440212779_759722503002558_2165049528631978589_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHilYBwGWU4Ufb4uXQh6HP0ijqG7V1LGziKOobtXUsbOLuEexhZ24D2Qomw_S4mGyrYBe_Y4R2aZGbWmsAoJbWf&_nc_ohc=kpoXAKXB-j8Q7kNvgFOVPV3&_nc_ht=scontent.fhan14-1.fna&oh=00_AYBYbv1DrFiD2sQehuuYoy6kavG9MGIwjlMgfOSGiYfGNw&oe=6644BA86"
-          className="banner-header"
-          alt=""
-        />
         <div className="container">
           <div className="carousel">
             <CarouselHome />
@@ -92,7 +87,7 @@ export const Home = () => {
             alt=""
           />
         </a>
-      </div>
+      </div> */}
       <div className="wrapper-book ">
         <strong className="title-book">TOP SÁCH BÁN CHẠY</strong>
         <Flex wrap="wrap" gap="small">
@@ -133,7 +128,7 @@ export const Home = () => {
         <button style={{ marginTop: "20px" }} onClick={handleAddBook}>
           Thêm sách
         </button>
-      </div> */}
+      </div>
     </StyledHome>
   );
 };

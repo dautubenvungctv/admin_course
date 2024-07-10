@@ -6,6 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import axios from "axios";
+import { Flex } from "antd";
 
 export const CarouselHome = () => {
   const [listCourse, setListCourse] = useState([]);
@@ -41,65 +42,11 @@ export const CarouselHome = () => {
   };
   return (
     <StyledCarousel>
-      {" "}
-      <Carousel
-        additionalTransfrom={0}
-        arrows
-        autoPlay
-        autoPlaySpeed={10000}
-        centerMode={false}
-        className=""
-        containerClass="container-with-dots"
-        dotListClass=""
-        draggable
-        focusOnSelect={false}
-        infinite={false}
-        itemClass=""
-        keyBoardControl
-        minimumTouchDrag={80}
-        pauseOnHover
-        renderArrowsWhenDisabled={false}
-        renderButtonGroupOutside={false}
-        renderDotsOutside={false}
-        responsive={{
-          superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 3000, min: 1200 },
-            items: 3,
-          },
-          desktop: {
-            breakpoint: {
-              max: 1200,
-              min: 1024,
-            },
-            items: 3,
-            partialVisibilityGutter: 40,
-          },
-          tablet: {
-            breakpoint: {
-              max: 1024,
-              min: 586,
-            },
-            items: 3,
-            partialVisibilityGutter: 30,
-          },
-          mobile: {
-            breakpoint: {
-              max: 586,
-              min: 0,
-            },
-            items: 2,
-            partialVisibilityGutter: 30,
-          },
-        }}
-        rewind
-        rewindWithAnimation={false}
-        rtl={false}
-        shouldResetAutoplay
-        showDots={false}
-        sliderClass=""
-        slidesToSlide={2}
-        swipeable
+      <Flex
+        style={{ padding: "20px 100px" }}
+        wrap="wrap"
+        gap="24px"
+        justify="center"
       >
         {listCourse.map((item: any, index: any) => (
           <div>
@@ -134,7 +81,8 @@ export const CarouselHome = () => {
             </Link>
           </div>
         ))}
-      </Carousel>
+      </Flex>
+
       <button onClick={handleAdd}>Thêm sản phẩm</button>
     </StyledCarousel>
   );
