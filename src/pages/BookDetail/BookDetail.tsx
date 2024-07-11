@@ -19,7 +19,7 @@ export const BookDetail = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const userID = localStorage.getItem("userID");
-
+  const [demo, setDemo] = useState("");
   const getDetailCourse = () => {
     axios
       .get(`http://185.250.36.147:3000/books/${id}`)
@@ -34,6 +34,7 @@ export const BookDetail = () => {
       setImage(course.image);
       setDescription(course.description);
       setPrice(course.price);
+      setDemo(course.demo);
     }
   }, [course]);
   const handlePut = () => {
@@ -43,6 +44,7 @@ export const BookDetail = () => {
         title: title,
         price: price,
         description: description,
+        demo: demo,
       })
       .then((res) => {
         if (res.status === 200) {
@@ -134,7 +136,12 @@ export const BookDetail = () => {
               </div> */}
               <img src="" alt="" />
               <div className="wp-caption-text">
-                Share {course?.title} với bạn bè để cùng tiến bộ nào
+                <input
+                  style={{ width: "100%" }}
+                  type="text"
+                  value={demo}
+                  onChange={(e) => setDemo(e.target.value)}
+                />
               </div>
             </div>
             <div className="describe-second">
@@ -182,9 +189,7 @@ export const BookDetail = () => {
                 Lưu ý: Đăng ký khoá học để được vào group.
               </div>
               <img src="" alt="" />
-              <div className="wp-caption-text">
-                Share {course?.title} với bạn bè để cùng tiến bộ nào
-              </div>
+              <div className="wp-caption-text">{course?.demo}</div>
             </div>
             <div className="describe-second">
               <div className="title-product">

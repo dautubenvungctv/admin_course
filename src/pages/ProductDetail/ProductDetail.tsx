@@ -14,10 +14,9 @@ export const ProductDetail = () => {
 
   const { id } = useParams();
   const [course, setCourse] = useState<any>(null);
-  console.log("course: ", course?.title);
   const [fix, setFix] = useState(false);
   const [title, setTitle] = useState("");
-  console.log("title: ", title);
+  const [demo, setDemo] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -37,6 +36,7 @@ export const ProductDetail = () => {
       setImage(course.image);
       setDescription(course.description);
       setPrice(course.price);
+      setDemo(course.demo);
     }
   }, [course]);
   const handlePut = () => {
@@ -46,6 +46,7 @@ export const ProductDetail = () => {
         title: title,
         price: price,
         description: description,
+        demo: demo,
       })
       .then((res) => {
         if (res.status === 200) {
@@ -137,7 +138,12 @@ export const ProductDetail = () => {
               </div>
               <img src="" alt="" />
               <div className="wp-caption-text">
-                Share {course?.title} với bạn bè để cùng tiến bộ nào
+                <input
+                  style={{ width: "100%" }}
+                  type="text"
+                  value={demo}
+                  onChange={(e) => setDemo(e.target.value)}
+                />
               </div>
             </div>
             <div className="describe-second">
@@ -185,9 +191,7 @@ export const ProductDetail = () => {
                 Lưu ý: Đăng ký khoá học để được vào group.
               </div>
               <img src="" alt="" />
-              <div className="wp-caption-text">
-                Share {course?.title} với bạn bè để cùng tiến bộ nào
-              </div>
+              <div className="wp-caption-text">{course?.demo}</div>
             </div>
             <div className="describe-second">
               <div className="title-product">

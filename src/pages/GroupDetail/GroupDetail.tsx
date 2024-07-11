@@ -19,7 +19,7 @@ export const GroupDetail = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const userID = localStorage.getItem("userID");
-
+  const [demo, setDemo] = useState("");
   const getDetailCourse = () => {
     axios
       .get(`http://185.250.36.147:3000/groups/${id}`)
@@ -33,6 +33,7 @@ export const GroupDetail = () => {
       setTitle(course.title);
       setImage(course.image);
       setDescription(course.description);
+      setDemo(course?.demo);
     }
   }, [course]);
   const handlePut = () => {
@@ -40,7 +41,7 @@ export const GroupDetail = () => {
       .put(`http://185.250.36.147:3000/groups/${id}`, {
         image: image,
         title: title,
-
+        demo: demo,
         description: description,
       })
       .then((res) => {
@@ -132,7 +133,12 @@ export const GroupDetail = () => {
               </div>
               <img src="" alt="" />
               <div className="wp-caption-text">
-                Share {course?.title} với bạn bè để cùng tiến bộ nào
+                <input
+                  style={{ width: "100%" }}
+                  type="text"
+                  value={demo}
+                  onChange={(e) => setDemo(e.target.value)}
+                />
               </div>
             </div>
             <div className="describe-second">
@@ -180,9 +186,7 @@ export const GroupDetail = () => {
                 Lưu ý: Đăng ký khoá học để được vào group.
               </div>
               <img src="" alt="" />
-              <div className="wp-caption-text">
-                Share {course?.title} với bạn bè để cùng tiến bộ nào
-              </div>
+              <div className="wp-caption-text">{course?.demo}</div>
             </div>
             <div className="describe-second">
               <div className="title-product">
