@@ -34,6 +34,7 @@ export const GroupDetail = () => {
       setImage(course.image);
       setDescription(course.description);
       setDemo(course?.demo);
+      setPrice(course.price);
     }
   }, [course]);
   const handlePut = () => {
@@ -43,6 +44,7 @@ export const GroupDetail = () => {
         title: title,
         demo: demo,
         description: description,
+        price: price,
       })
       .then((res) => {
         if (res.status === 200) {
@@ -108,12 +110,12 @@ export const GroupDetail = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 type="text"
               />
-              {/* <input
+              <input
                 placeholder="Giá tiền"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 type="text"
-              /> */}
+              />
               <div className="row-info">
                 <div className="left">Thời lượng</div>
                 <div className="right">22 bài giảng</div>
@@ -164,11 +166,8 @@ export const GroupDetail = () => {
             </div>
             <div className="technical-information">
               <h1 className="title-product">{course?.title}</h1>
-              {/* <div className="price">{course?.price}₫</div> */}
-              {/* <div className="row-info">
-                <div className="left">Thời lượng</div>
-                <div className="right">22 bài giảng</div>
-              </div> */}
+              <div className="price">{course?.price}₫</div>
+
               <button
                 onClick={() => setFix(true)}
                 className="btn-add-shopping-cart"
