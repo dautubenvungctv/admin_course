@@ -6,6 +6,31 @@ import { styled } from "styled-components";
 
 export const StyledHome = styled.div<any>`
   @media (max-width: 886px) {
+    .company {
+      flex-direction: column;
+      padding: 0 15px !important;
+      margin-bottom: 134px;
+      .img-company {
+        width: 100% !important;
+        .avt-cty {
+          height: 246px !important;
+        }
+        .blurred-section {
+          display: none;
+        }
+      }
+      .info-company {
+        position: static !important;
+        width: 100% !important;
+        .info-child {
+          position: static !important;
+          .text-company {
+            padding-right: 10px;
+            height: 108px !important;
+          }
+        }
+      }
+    }
     .box-headerhome {
       /* width: 100%; */
       padding: 0 15px;
@@ -62,6 +87,79 @@ export const StyledHome = styled.div<any>`
     }
   }
   @media (min-width: 886px) {
+    .company {
+      margin-top: 50px;
+      display: flex;
+      margin-bottom: 134px;
+
+      gap: 16px;
+      .img-company {
+        position: relative;
+        display: inline-block;
+        width: 60%;
+        .avt-cty {
+          height: 300px;
+        }
+        .blurred-section {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 20%;
+          height: 300px;
+          background: linear-gradient(to left, #072563, rgba(255, 255, 255, 0));
+        }
+      }
+      .info-company {
+        width: calc(100% - 40% - 16px);
+        position: relative;
+        .box-icon {
+          display: flex;
+          gap: 8px;
+          justify-content: flex-end;
+          align-items: center;
+          padding-bottom: 10px;
+
+          width: 100%;
+          .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 23px;
+            height: 23px;
+            border: 1px solid #ffffff;
+            border-radius: 9999999px;
+            background-color: #fff;
+            &:hover {
+              transform: scale(1.05);
+              width: 25px;
+              height: 25px;
+              box-shadow: none;
+              border: 1px solid #b2bec3;
+            }
+          }
+        }
+        .info-child {
+          position: absolute;
+          left: -33px;
+          .title-company {
+            margin-bottom: 10px;
+            h1 {
+              margin: 3px 0;
+              font-weight: 500;
+            }
+          }
+          .text-company {
+            border-left: 2px solid #f0f3fa;
+            padding-left: 30px;
+
+            font-size: 12px;
+            text-align: justify;
+            height: 150px;
+          }
+        }
+      }
+    }
     .box-headerhome {
       .banner-header {
         display: block;

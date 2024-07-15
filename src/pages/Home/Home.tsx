@@ -2,12 +2,33 @@ import React, { useEffect, useState } from "react";
 import { CarouselHome } from "../../component/Layout/Carousel/Carousel";
 import { StyledHome } from "./styled";
 import { Link } from "react-router-dom";
+import { makeUploadImage } from "../../component/ConvertLinkImage";
 import axios from "axios";
 import { Flex } from "antd";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { FaFacebookSquare, FaTiktok, FaYoutube } from "react-icons/fa";
 export const Home = () => {
+  const [fix, setFix] = useState(false);
+  const [image, setImage] = useState("");
+  const [titleFirst, setTitleFirst] = useState("");
+  const [titleSecond, setTitleSecond] = useState("");
+  const [des, setDes] = useState("");
+  const [infoCompany, setInfoCompany] = useState<any>([]);
   const [listCourse, setListCourse] = useState([]);
   const [listBooks, setListBooks] = useState([]);
+  const getCompany = () => {
+    axios.get(`http://185.250.36.147:3000/title`).then((res) => {
+      setInfoCompany(res.data);
+      setTitleFirst(res.data[0].title_first);
+      setTitleSecond(res.data[0].title_second);
+      setImage(res.data[0].image_url);
+      setDes(res.data[0].description);
+    });
+  };
+  useEffect(() => {
+    getCompany();
+  }, []);
+
   const getListCourses = () => {
     axios
       .get("http://185.250.36.147:3000/courses")
@@ -31,6 +52,7 @@ export const Home = () => {
       }
     });
   };
+
   const handleAddBook = () => {
     axios
       .post(`http://185.250.36.147:3000/books`, {
@@ -46,8 +68,153 @@ export const Home = () => {
         }
       });
   };
+  const handleSumbmitCompany = () => {
+    axios
+      .post(`http://185.250.36.147:3000/update_title`, {
+        title_first: titleFirst,
+        title_second: titleSecond,
+        description: des,
+        image_url: image,
+      })
+      .then((res) => {
+        getCompany();
+      });
+    setFix(false);
+  };
   return (
     <StyledHome>
+      {fix ? (
+        <button onClick={handleSumbmitCompany} className="btn-fix">
+          Lưu
+        </button>
+      ) : (
+        <button onClick={() => setFix(true)} className="btn-fix">
+          Sửa giới thiệu cty
+        </button>
+      )}
+
+      {fix ? (
+        <div style={{ marginBottom: "300px" }} className="company">
+          <div className="img-company">
+            <input
+              onChange={async (e: any) => {
+                const file = e.target.files[0];
+                let response = await makeUploadImage(file);
+                setImage(response?.secure_url);
+
+                // Clear the input value after setting the image
+                e.target.value = null;
+              }}
+              type="file"
+              id="img"
+              name="img"
+              accept="image/*"
+            />
+            <div className="blurred-section"></div>
+          </div>
+          <div className="info-company">
+            <div className="box-icon">
+              <a
+                target="_plank"
+                href="https://www.facebook.com/hoangvinhdautu"
+                style={{ color: "#3D5A98" }}
+                className="icon"
+              >
+                <FaFacebookSquare />
+              </a>
+              <a
+                target="_plank"
+                href="https://www.youtube.com/@hoangvinhdautubenvung"
+                style={{ color: "red" }}
+                className="icon"
+              >
+                <FaYoutube />
+              </a>
+              <a
+                target="_plank"
+                href="https://www.tiktok.com/@hoangvinhdautu"
+                style={{ color: "black" }}
+                className="icon"
+              >
+                <FaTiktok />
+              </a>
+            </div>
+            <div className="info-child">
+              <div className="title-company">
+                <input
+                  type="text"
+                  value={titleFirst}
+                  onChange={(e) => setTitleFirst(e.target.value)}
+                />
+                <input
+                  type="text"
+                  value={titleSecond}
+                  onChange={(e) => setTitleSecond(e.target.value)}
+                />
+              </div>
+              <div className="text-company">
+                <textarea
+                  value={des}
+                  onChange={(e) => setDes(e.target.value)}
+                  rows={6} // Số dòng bạn muốn hiển thị ban đầu
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          {infoCompany.map((item: any, index: any) => (
+            <div className="company">
+              <div className="img-company">
+                <img
+                  style={{ width: "100%" }}
+                  src={item?.image_url}
+                  alt=""
+                  className="avt-cty"
+                />
+                <div className="blurred-section"></div>
+              </div>
+              <div className="info-company">
+                <div className="box-icon">
+                  <a
+                    target="_plank"
+                    href="https://www.facebook.com/hoangvinhdautu"
+                    style={{ color: "#3D5A98" }}
+                    className="icon"
+                  >
+                    <FaFacebookSquare />
+                  </a>
+                  <a
+                    target="_plank"
+                    href="https://www.youtube.com/@hoangvinhdautubenvung"
+                    style={{ color: "red" }}
+                    className="icon"
+                  >
+                    <FaYoutube />
+                  </a>
+                  <a
+                    target="_plank"
+                    href="https://www.tiktok.com/@hoangvinhdautu"
+                    style={{ color: "black" }}
+                    className="icon"
+                  >
+                    <FaTiktok />
+                  </a>
+                </div>
+                <div className="info-child">
+                  <div className="title-company">
+                    <h1>{item?.title_first}</h1>
+                    <h1>{item?.title_second}</h1>
+                  </div>
+                  <div className="text-company">{item?.description}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
       <strong className="title-course">KHOÁ HỌC</strong>
       <div className="box-headerhome">
         <div className="container">
