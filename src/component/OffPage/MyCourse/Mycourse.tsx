@@ -21,14 +21,14 @@ export const Mycourse = () => {
   const userID = localStorage.getItem("userID");
   const getListMyCourse = () => {
     axios
-      .get(`http://185.250.36.147:3000/course-after-payment/${userID}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/course-after-payment/${userID}`)
       .then((res1) => {
         setListMyCourse(res1?.data);
       });
   };
   const getListMyBook = () => {
     axios
-      .get(`http://185.250.36.147:3000/book-after-payment/${userID}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/book-after-payment/${userID}`)
       .then((res2) => {
         setListMyBook(res2?.data);
       });

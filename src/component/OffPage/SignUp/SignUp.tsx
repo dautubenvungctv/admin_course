@@ -40,7 +40,7 @@ export const SignUp = () => {
     }
     if (passWord !== "" || email !== "" || phoneNumber !== "") {
       axios
-        .post("http://185.250.36.147:3000/auth/register", {
+        .post(`${process.env.REACT_APP_PORT_ADMIN}/auth/register`, {
           email: email,
           name: "",
           phone: phoneNumber,

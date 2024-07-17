@@ -31,7 +31,7 @@ export const Login = () => {
 
     if (phoneNumber !== "" || passWord !== "") {
       axios
-        .post("http://185.250.36.147:3000/auth/login", {
+        .post(`${process.env.REACT_APP_PORT_ADMIN}/auth/login`, {
           phone: phoneNumber,
           password: passWord,
         })

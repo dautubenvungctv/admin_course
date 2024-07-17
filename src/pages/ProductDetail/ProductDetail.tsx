@@ -24,7 +24,13 @@ export const ProductDetail = () => {
 
   const getDetailCourse = () => {
     axios
-      .get(`http://185.250.36.147:3000/courses/${id}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/courses/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Custom-Header": "foobar",
+          //  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+        },
+      })
       .then((res) => setCourse(res.data[0]));
   };
   useEffect(() => {
@@ -41,13 +47,23 @@ export const ProductDetail = () => {
   }, [course]);
   const handlePut = () => {
     axios
-      .put(`http://185.250.36.147:3000/courses/${id}`, {
-        image: image,
-        title: title,
-        price: price,
-        description: description,
-        demo: demo,
-      })
+      .put(
+        `${process.env.REACT_APP_PORT_ADMIN}/courses/${id}`,
+        {
+          image: image,
+          title: title,
+          price: price,
+          description: description,
+          demo: demo,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Custom-Header": "foobar",
+            //  Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+          },
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           api.success({
@@ -131,7 +147,6 @@ export const ProductDetail = () => {
 
           <div className="describe">
             <div className="describe-first">
-              <div className="title">Mô tả</div>
               <div className="title-product">{course?.title}</div>
               <div className="warning">
                 Lưu ý: Đăng ký khoá học để được vào group.

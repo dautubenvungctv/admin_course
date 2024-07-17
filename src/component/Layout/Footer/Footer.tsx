@@ -24,22 +24,24 @@ export const Footer = () => {
   };
   const getGroups = () => {
     axios
-      .get("http://185.250.36.147:3000/groups")
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/groups`)
       .then((res) => setListGroups(res.data));
   };
   useEffect(() => {
     getGroups();
   }, []);
   const handleDeleteGroup = (key: any) => {
-    axios.delete(`http://185.250.36.147:3000/groups/${key}`).then((res) => {
-      if (res.status === 200) {
-        getGroups();
-      }
-    });
+    axios
+      .delete(`${process.env.REACT_APP_PORT_ADMIN}/groups/${key}`)
+      .then((res) => {
+        if (res.status === 200) {
+          getGroups();
+        }
+      });
   };
   const handleAddGroup = () => {
     axios
-      .post(`http://185.250.36.147:3000/groups`, {
+      .post(`${process.env.REACT_APP_PORT_ADMIN}/groups`, {
         image:
           "https://i.ibb.co/hmG2gqr/z5421020108369-37c79a91264e8cd71c01f40c56d9819d.jpg",
         title: "Tên group",

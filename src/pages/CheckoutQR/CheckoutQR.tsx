@@ -17,23 +17,25 @@ export const CheckoutQR = () => {
   const [listCourseCart, setListCourseCart] = useState<any>([]);
   const [listBookCart, setListBookCart] = useState<any>([]);
   const getOrder = () => {
-    axios.get(`http://185.250.36.147:3000/orders/${userID}`).then((res) => {
-      if (res.data.length > 0) {
-        setIdOder(res.data[res.data.length - 1].id);
-      }
-    });
+    axios
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/orders/${userID}`)
+      .then((res) => {
+        if (res.data.length > 0) {
+          setIdOder(res.data[res.data.length - 1].id);
+        }
+      });
   };
   useEffect(() => {
     getOrder();
   }, []);
   const getCourseCart = () => {
     axios
-      .get(`http://185.250.36.147:3000/course-cart/${userID}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/course-cart/${userID}`)
       .then((res) => setListCourseCart(res.data));
   };
   const getBookCart = () => {
     axios
-      .get(`http://185.250.36.147:3000/book-cart/${userID}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/book-cart/${userID}`)
       .then((res) => setListBookCart(res.data));
   };
   useEffect(() => {
@@ -77,7 +79,7 @@ export const CheckoutQR = () => {
     };
   }, []);
   const paymentSuccessful = () => {
-    axios.post(`http://185.250.36.147:3000/payment-successful`, {
+    axios.post(`${process.env.REACT_APP_PORT_ADMIN}/payment-successful`, {
       user_id: userID,
       book_id: listBookCart[0]?.cart_id,
       course_id: listCourseCart[0]?.cart_id,

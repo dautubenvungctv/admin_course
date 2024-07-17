@@ -22,7 +22,7 @@ export const BookDetail = () => {
   const [demo, setDemo] = useState("");
   const getDetailCourse = () => {
     axios
-      .get(`http://185.250.36.147:3000/books/${id}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/books/${id}`)
       .then((res) => setCourse(res.data[0]));
   };
   useEffect(() => {
@@ -39,13 +39,23 @@ export const BookDetail = () => {
   }, [course]);
   const handlePut = () => {
     axios
-      .put(`http://185.250.36.147:3000/books/${id}`, {
-        image: image,
-        title: title,
-        price: price,
-        description: description,
-        demo: demo,
-      })
+      .put(
+        `${process.env.REACT_APP_PORT_ADMIN}/books/${id}`,
+        {
+          image: image,
+          title: title,
+          price: price,
+          description: description,
+          demo: demo,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Custom-Header": "foobar",
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+          },
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           api.success({

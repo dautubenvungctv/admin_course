@@ -14,9 +14,12 @@ export const ShoppingCart = () => {
     // Gửi id và quantity mới lên server
 
     axios
-      .put(`http://185.250.36.147:3000/book-cart/${useID}/${item.book_id}`, {
-        quantity: value,
-      })
+      .put(
+        `${process.env.REACT_APP_PORT_ADMIN}/book-cart/${useID}/${item.book_id}`,
+        {
+          quantity: value,
+        }
+      )
       .then((res) => {
         getCourseCart();
         getBookCart();
@@ -26,12 +29,12 @@ export const ShoppingCart = () => {
 
   const getCourseCart = () => {
     axios
-      .get(`http://185.250.36.147:3000/course-cart/${useID}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/course-cart/${useID}`)
       .then((res) => setListCourseCart(res.data));
   };
   const getBookCart = () => {
     axios
-      .get(`http://185.250.36.147:3000/book-cart/${useID}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/book-cart/${useID}`)
       .then((res) => setListBookCart(res.data));
   };
   useEffect(() => {
@@ -44,13 +47,13 @@ export const ShoppingCart = () => {
     if (item.hasOwnProperty("course_id")) {
       axios
         .delete(
-          `http://185.250.36.147:3000/course-cart/${item.user_id}/${item?.course_id}`
+          `${process.env.REACT_APP_PORT_ADMIN}/course-cart/${item.user_id}/${item?.course_id}`
         )
         .then((res) => getCourseCart());
     } else if (item.hasOwnProperty("book_id")) {
       axios
         .delete(
-          `http://185.250.36.147:3000/book-cart/${item.user_id}/${item?.book_id}`
+          `${process.env.REACT_APP_PORT_ADMIN}/book-cart/${item.user_id}/${item?.book_id}`
         )
         .then((res) => getBookCart());
     }

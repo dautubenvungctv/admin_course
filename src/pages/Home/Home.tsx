@@ -17,13 +17,21 @@ export const Home = () => {
   const [listCourse, setListCourse] = useState([]);
   const [listBooks, setListBooks] = useState([]);
   const getCompany = () => {
-    axios.get(`http://185.250.36.147:3000/title`).then((res) => {
-      setInfoCompany(res.data);
-      setTitleFirst(res.data[0].title_first);
-      setTitleSecond(res.data[0].title_second);
-      setImage(res.data[0].image_url);
-      setDes(res.data[0].description);
-    });
+    axios
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/title`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Custom-Header": "foobar",
+          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+        },
+      })
+      .then((res) => {
+        setInfoCompany(res.data);
+        setTitleFirst(res.data[0].title_first);
+        setTitleSecond(res.data[0].title_second);
+        setImage(res.data[0].image_url);
+        setDes(res.data[0].description);
+      });
   };
   useEffect(() => {
     getCompany();
@@ -31,7 +39,13 @@ export const Home = () => {
 
   const getListCourses = () => {
     axios
-      .get("http://185.250.36.147:3000/courses")
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/courses`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Custom-Header": "foobar",
+          //Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+        },
+      })
       .then((res) => setListCourse(res.data));
   };
   useEffect(() => {
@@ -39,29 +53,53 @@ export const Home = () => {
   }, []);
   const getBooks = () => {
     axios
-      .get("http://185.250.36.147:3000/books")
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/books`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Custom-Header": "foobar",
+          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+        },
+      })
       .then((res) => setListBooks(res.data));
   };
   useEffect(() => {
     getBooks();
   }, []);
   const handleDeleteBook = (key: any) => {
-    axios.delete(`http://185.250.36.147:3000/books/${key}`).then((res) => {
-      if (res.status === 200) {
-        getBooks();
-      }
-    });
+    axios
+      .delete(`${process.env.REACT_APP_PORT_ADMIN}/books/${key}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Custom-Header": "foobar",
+          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          getBooks();
+        }
+      });
   };
 
   const handleAddBook = () => {
     axios
-      .post(`http://185.250.36.147:3000/books`, {
-        image:
-          "https://i.ibb.co/hmG2gqr/z5421020108369-37c79a91264e8cd71c01f40c56d9819d.jpg",
-        title: "Tên sách",
-        description: "Mô tả sách",
-        price: "2000",
-      })
+      .post(
+        `${process.env.REACT_APP_PORT_ADMIN}/books`,
+        {
+          image:
+            "https://i.ibb.co/hmG2gqr/z5421020108369-37c79a91264e8cd71c01f40c56d9819d.jpg",
+          title: "Tên sách",
+          description: "Mô tả sách",
+          price: "2000",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Custom-Header": "foobar",
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+          },
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           getBooks();
@@ -70,12 +108,22 @@ export const Home = () => {
   };
   const handleSumbmitCompany = () => {
     axios
-      .post(`http://185.250.36.147:3000/update_title`, {
-        title_first: titleFirst,
-        title_second: titleSecond,
-        description: des,
-        image_url: image,
-      })
+      .post(
+        `${process.env.REACT_APP_PORT_ADMIN}/update_title`,
+        {
+          title_first: titleFirst,
+          title_second: titleSecond,
+          description: des,
+          image_url: image,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Custom-Header": "foobar",
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+          },
+        }
+      )
       .then((res) => {
         getCompany();
       });
@@ -238,9 +286,13 @@ export const Home = () => {
               Truy cập website/app dautubenvung.vn
             </div>
             <div className="box-btn">
-              <Link className="btn-member" to="/member">
+              <a
+                target="_plank"
+                href="https://dautubenvung.vn/"
+                className="btn-member"
+              >
                 Xem ngay
-              </Link>
+              </a>
             </div>
           </div>
         </div>

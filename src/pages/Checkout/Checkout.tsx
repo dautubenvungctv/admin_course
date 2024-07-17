@@ -24,12 +24,12 @@ export const Checkout = () => {
   const [listBookCart, setListBookCart] = useState<any>([]);
   const getCourseCart = () => {
     axios
-      .get(`http://185.250.36.147:3000/course-cart/1`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/course-cart/1`)
       .then((res) => setListCourseCart(res.data));
   };
   const getBookCart = () => {
     axios
-      .get(`http://185.250.36.147:3000/book-cart/1`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/book-cart/1`)
       .then((res) => setListBookCart(res.data));
   };
   useEffect(() => {
@@ -51,17 +51,27 @@ export const Checkout = () => {
       address !== ""
     ) {
       axios
-        .post(`http://185.250.36.147:3000/submit-order`, {
-          user_id: userID,
-          name: name,
-          phone: phoneNumber,
-          email: email,
-          city: city,
-          district: district,
-          address: address,
-          bookCartId: listBookCart[0]?.cart_id,
-          courseCartId: listCourseCart[0]?.cart_id,
-        })
+        .post(
+          `${process.env.REACT_APP_PORT_ADMIN}/submit-order`,
+          {
+            user_id: userID,
+            name: name,
+            phone: phoneNumber,
+            email: email,
+            city: city,
+            district: district,
+            address: address,
+            bookCartId: listBookCart[0]?.cart_id,
+            courseCartId: listCourseCart[0]?.cart_id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "X-Custom-Header": "foobar",
+              // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+            },
+          }
+        )
         .then((res) => {
           if (res.status === 200) {
             nextHome("/check-outqr");

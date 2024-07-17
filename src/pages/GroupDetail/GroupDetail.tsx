@@ -22,7 +22,7 @@ export const GroupDetail = () => {
   const [demo, setDemo] = useState("");
   const getDetailCourse = () => {
     axios
-      .get(`http://185.250.36.147:3000/groups/${id}`)
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/groups/${id}`)
       .then((res) => setCourse(res.data[0]));
   };
   useEffect(() => {
@@ -39,13 +39,23 @@ export const GroupDetail = () => {
   }, [course]);
   const handlePut = () => {
     axios
-      .put(`http://185.250.36.147:3000/groups/${id}`, {
-        image: image,
-        title: title,
-        demo: demo,
-        description: description,
-        price: price,
-      })
+      .put(
+        `${process.env.REACT_APP_PORT_ADMIN}/groups/${id}`,
+        {
+          image: image,
+          title: title,
+          demo: demo,
+          description: description,
+          price: price,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Custom-Header": "foobar",
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+          },
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           api.success({

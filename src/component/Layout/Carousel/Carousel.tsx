@@ -12,28 +12,46 @@ export const CarouselHome = () => {
   const [listCourse, setListCourse] = useState([]);
   const getListCourses = () => {
     axios
-      .get("http://185.250.36.147:3000/courses")
+      .get(`${process.env.REACT_APP_PORT_ADMIN}/courses`)
       .then((res) => setListCourse(res.data));
   };
   useEffect(() => {
     getListCourses();
   }, []);
   const handleDelete = (key: any) => {
-    axios.delete(`http://185.250.36.147:3000/courses/${key}`).then((res) => {
-      if (res.status === 200) {
-        getListCourses();
-      }
-    });
+    axios
+      .delete(`${process.env.REACT_APP_PORT_ADMIN}/courses/${key}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Custom-Header": "foobar",
+          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          getListCourses();
+        }
+      });
   };
   const handleAdd = () => {
     axios
-      .post(`http://185.250.36.147:3000/courses`, {
-        image:
-          "https://i.ibb.co/hmG2gqr/z5421020108369-37c79a91264e8cd71c01f40c56d9819d.jpg",
-        title: "Khoá học test",
-        description: "ok 123 ksdjfh;ik",
-        price: "2000",
-      })
+      .post(
+        `${process.env.REACT_APP_PORT_ADMIN}/courses`,
+        {
+          image:
+            "https://i.ibb.co/hmG2gqr/z5421020108369-37c79a91264e8cd71c01f40c56d9819d.jpg",
+          title: "Khoá học test",
+          description: "ok 123 ksdjfh;ik",
+          price: "2000",
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-Custom-Header": "foobar",
+            // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`,
+          },
+        }
+      )
       .then((res) => {
         if (res.status === 200) {
           getListCourses();
