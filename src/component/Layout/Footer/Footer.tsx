@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 export const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [listGroups, setListGroups] = useState([]);
-  console.log("listGroups: ", listGroups);
   const showModal = () => {
     setIsModalOpen(true);
   };

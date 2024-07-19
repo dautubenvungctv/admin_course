@@ -27,7 +27,7 @@ export const GroupDetail = () => {
   };
   useEffect(() => {
     getDetailCourse();
-  }, []);
+  }, [id]);
   useEffect(() => {
     if (course) {
       setTitle(course.title);
